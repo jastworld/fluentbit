@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: node
+  labels:
+    name: node
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+      - name: node
+        # Replace image with image previously built
+        image: ubuntu
+        #command: [ "/bin/bash", "-ce", "tail -f /dev/null" ]
+        imagePullPolicy: Always
+      restartPolicy: Always
