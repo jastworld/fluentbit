@@ -1,0 +1,23 @@
+{
+  "name": "nodeapp",
+  "version": "1.0.0",
+  "description": "An app that creates log files in a specified directory",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jastworld/docker_filebeat.git"
+  },
+  "author": "Tayo Amuneke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jastworld/docker_filebeat/issues"
+  },
+  "homepage": "https://github.com/jastworld/docker_filebeat#readme",
+  "dependencies": {
+    "winston": "^3.2.1"
+  }
+}

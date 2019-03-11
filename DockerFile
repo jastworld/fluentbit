@@ -1,0 +1,40 @@
+
+FROM node:10-jessie
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+# where available (npm@5+)
+COPY . ./
+# COPY filebeat.yml ./
+
+# COPY filebeat.reference.yml ./
+RUN mkdir ./log/
+RUN apt-get update && apt-get install -y gnupg2
+
+RUN apt-get update -y
+RUN apt-get -y install sudo
+RUN apt-get install apt-transport-https -y
+
+
+# Add your packages and all here
+
+
+# If you are building your code for production
+# RUN npm ci --only=production
+RUN wget -qO - https://packages.fluentbit.io/fluentbit.key | sudo apt-key add - 
+RUN   echo "deb https://packages.fluentbit.io/ubuntu xenial main" | sudo tee -a /etc/apt/sources.list && \
+      apt-get update -y 
+RUN      apt-get install td-agent-bit && \
+      # apt-get install -y supervisor && \
+      apt-get update -y && \
+      ./opt/td-agent-bit/bin/td-agent-bit stop -c /etc/td-agent-bit/td-agent-bit.conf && \
+      mv td-agent-bit.conf /etc/td-agent-bit/
+      #service td-agent-bit stop
+# RUN mkdir -p /var/log/supervisor
+# COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# RUN chmod go-w /etc/filebeat/filebeat.yml
+
+# CMD ["/usr/bin/supervisord"]
